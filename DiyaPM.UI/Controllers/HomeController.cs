@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiyaPM.UI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,20 @@ namespace DiyaPM.UI.Controllers
 {
     public class HomeController : Controller
     {
+        DiyaPMContext DiyaPMContext = new DiyaPMContext();
         public ActionResult Index()
         {
-            return View();
-        }
 
-        public ActionResult About()
+            return View();
+        } 
+
+        public ActionResult Menu()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            MenuViewModel menuViewModel = new MenuViewModel();
+            menuViewModel.Menus = DiyaPMContext.Menus.Where(x => x.ParentID == 0).ToList();
+            menuViewModel.ParentMenus = DiyaPMContext.Menus.Where(x => x.ParentID != 0).ToList();
+            
+            return PartialView("_Menu", menuViewModel);
         }
     }
 }
