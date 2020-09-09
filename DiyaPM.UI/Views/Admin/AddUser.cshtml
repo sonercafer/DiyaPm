@@ -1,0 +1,37 @@
+﻿@using GridMvc.Html
+@model IEnumerable<DiyaPM.UI.Models.User>
+@{
+    ViewBag.Title = "Kullanıcılar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">KULLANICI EKLE</h5>
+                <input type="text" class="form-control" placeholder="Kullanıcı Adı" id="txtUserName" /><br />
+                <input type="password" class="form-control" placeholder="Şifre" id="txtPassword" /><br />
+                <input type="submit" onclick="UserAdd();" class="btn btn-success form-control" value="Ekle" />
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">TÜM KULLANICILAR</h5>
+
+                @Html.Grid(Model).Columns(col =>
+                {
+                    col.Add(x => x.id, true);
+                    col.Add(x => x.UserName).SetWidth(500).Titled("Kullanıcı").Filterable(true); 
+
+                    col.Add().Encoded(false).SetWidth(10).Sanitized(false).RenderValueAs(x => Html.ActionLink("Düzenle", "EditUser", new { id = x.id }, new { @class = "btn btn-warning btn-sm" }));
+
+                    col.Add().Encoded(false).SetWidth(10).Sanitized(false).RenderValueAs(x => Html.ActionLink("Sil", "DeleteUser", new { id = x.id }, new { @class = "btn btn-danger btn-sm" }));
+
+                }).WithPaging(10).SetLanguage("tr").Sortable(true).EmptyText("Kayıtlı kullanıcı bulunmamaktadır.")
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -14,6 +13,8 @@ namespace DiyaPM.UI.Models
         public string MenuName { get; set; }
         public int ParentID { get; set; }
         public string IconName { get; set; }
-
+        public string Action { get; set; }
+        public string Controller { get; set; }
+        public string Code { get; set; }
     }
 }

@@ -1,0 +1,74 @@
+﻿@model DiyaPM.UI.Models.User
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Login Boxed - ArchitectUI HTML Bootstrap 4 Dashboard Template</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="ArchitectUI HTML Bootstrap 4 Dashboard Template">
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <link href="/assets/main.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container app-theme-white body-tabs-shadow">
+        <div class="app-container">
+            <div class="h-100 bg-plum-plate bg-animation">
+                <div class="d-flex h-100 justify-content-center align-items-center">
+                    <div class="mx-auto app-login-box col-md-8">
+                        <div class="app-logo-inverse mx-auto mb-3"></div>
+                        <div class="modal-dialog w-100 mx-auto">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="h5 modal-title text-center">
+                                        <h4 class="mt-2">
+                                            <b>DiyaPM</b>
+                                            <span>Kullanıcı Girişi</span><br />
+                                            <div class="divider"></div>
+                                        </h4>
+                                    </div>
+                                    @using (Html.BeginForm("Login", "Security", FormMethod.Post))
+                                    {
+                                        <div class="form-row">
+                                            <div class="col-md-12">
+                                                <div class="position-relative form-group">
+                                                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.UserName) })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="position-relative form-group">
+                                                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.Password) })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="float-right">
+                                            <input type="submit" class="btn btn-primary btn-lg" value="Giriş Yap">
+                                        </div>
+                                        <p class="text-danger">@ViewBag.Message</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center text-white opacity-8 mt-3">Copyright © DiyaPM 2020</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="/assets/scripts/global.js"></script>
+</body>
+
+</html>

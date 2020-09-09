@@ -1,0 +1,21 @@
+﻿@model DiyaPM.UI.Models.User
+@{
+    ViewBag.Title = "Kullanıcı Düzenle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">KULLANICI DÜZENLE</h5>
+                @Html.HiddenFor(model => model.id, new { id = "hdnUserId" })
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", id = "txtUserName", placeholder = Html.DisplayNameFor(x => x.UserName) }) <br />
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", id = "txtPassword", placeholder = Html.DisplayNameFor(x => x.Password) }) <br />
+                <input type="submit" onclick="UpdateUser();" class="btn btn-success form-control" value="Güncelle" />
+                <br /><br /><a href="/Admin/AddUser"><input type="button" class="btn btn-secondary form-control" value="İptal" /></a>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,31 +1,41 @@
-﻿@using DiyaPM.UI.Models
+﻿@using DiyaPM.UI.Helpers;
+@using DiyaPM.UI.Models.ViewModels
 @model MenuViewModel
-
+ 
 @foreach (var item in Model.Menus)
 {
-    if (item.ParentID == 0)
-    {
-        <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--open" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
-            <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
-                <span class="kt-menu__link-icon">
-                    <i class="fa fa-@item.IconName"></i>
-                </span>
-                <span class="kt-menu__link-text">@item.MenuName</span>
-                <i class="kt-menu__ver-arrow la la-angle-right"></i>
-            </a>
-            <div class="kt-menu__submenu ">
-                <span class="kt-menu__arrow"></span>
-                <ul class="kt-menu__subnav">
-                    @foreach (var parent in Model.ParentMenus)
-                    {
-                        if (parent.ParentID == item.id)
-                        {
-                            <li class="kt-menu__item " aria-haspopup="true"><a href="layout/general/fixed-content.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@parent.MenuName</span></a></li>
-                        }
-                    } 
-                </ul>
-            </div>
-        </li>
-    }
+<li>
+    <a href="#">
+        <i class="metismenu-icon fa fa-@item.IconName"></i>
+        @item.MenuName
 
+        @if (Model.SubMenus.Any(x => x.ParentID == item.id))
+        {
+            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+        }
+
+    </a>
+    @foreach (var subMenu in Model.SubMenus.Where(x => x.ParentID == item.id))
+    {
+        <ul>
+            <li id="@subMenu.Code">
+                @if (subMenu.Action == "#")
+                {
+                    <a href="#">
+                        <i class="metismenu-icon"></i>
+                        @subMenu.MenuName
+                    </a> 
+                }
+                else
+                {
+                    <a href="/@subMenu.Controller/@subMenu.Action">
+                        <i class="metismenu-icon"></i>
+                        @subMenu.MenuName
+                    </a>
+                }
+
+            </li>
+        </ul>
+    }
+</li>
 }

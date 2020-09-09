@@ -1,0 +1,38 @@
+﻿@using GridMvc.Html
+@model IEnumerable<DiyaPM.UI.Models.Role>
+@{
+    ViewBag.Title = "Roller";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">ROL EKLE</h5>
+                <input type="text" class="form-control" placeholder="Rol Adı" id="txtRole" /><br />
+                <input type="submit" onclick="AddRole();" class="btn btn-success form-control" value="Ekle"  />
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">TÜM ROLLER</h5>
+
+                @Html.Grid(Model).Columns(col =>
+           {
+               col.Add(x => x.id, true);
+               col.Add(x => x.Name).SetWidth(500).Titled("Role").Filterable(true);
+
+
+               col.Add().Encoded(false).SetWidth(10).Sanitized(false).RenderValueAs(x => Html.ActionLink("Düzenle", "EditRole", new { id = x.id }, new { @class = "btn btn-warning btn-sm" }));
+
+               col.Add().Encoded(false).SetWidth(10).Sanitized(false).RenderValueAs(x => Html.ActionLink("Sil", "DeleteRole", new { id = x.id }, new { @class = "btn btn-danger btn-sm"}));
+
+           }).WithPaging(10).SetLanguage("tr").Sortable(true).EmptyText("Kayıtlı rol bulunmamaktadır.")
+            </div>
+        </div>
+    </div>
+</div>
+

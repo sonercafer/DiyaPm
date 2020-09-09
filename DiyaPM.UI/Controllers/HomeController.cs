@@ -1,4 +1,5 @@
 ﻿using DiyaPM.UI.Models;
+using DiyaPM.UI.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,21 @@ namespace DiyaPM.UI.Controllers
 {
     public class HomeController : Controller
     {
-        DiyaPMContext DiyaPMContext = new DiyaPMContext();
+        DiyaPMContext _diyaPMContext = new DiyaPMContext();
+        [Authorize] 
         public ActionResult Index()
-        {
-
+        { 
             return View();
-        } 
+        }
 
-        public ActionResult Menu()
+        public PartialViewResult Menu()
         {
             MenuViewModel menuViewModel = new MenuViewModel();
-            menuViewModel.Menus = DiyaPMContext.Menus.Where(x => x.ParentID == 0).ToList();
-            menuViewModel.ParentMenus = DiyaPMContext.Menus.Where(x => x.ParentID != 0).ToList();
-            
+            menuViewModel.Menus = _diyaPMContext.Menus.Where(x => x.ParentID == 0).ToList();
+            menuViewModel.SubMenus = _diyaPMContext.Menus.Where(x => x.ParentID != 0).ToList(); 
+
             return PartialView("_Menu", menuViewModel);
         }
+
     }
 }
