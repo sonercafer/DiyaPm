@@ -1,0 +1,31 @@
+﻿@using GridMvc.Html
+@model DiyaPM.UI.Models.ViewModels.MenusInRolesViewModel
+@{
+    ViewBag.Title = "MenusInRoles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">rol seçiniz</h5>
+                @Html.DropDownListFor(M => M.Roles, new SelectList(Model.Roles, "id", "Name"), "--- Rol Seçiniz ---", new { id = "ddl_Roles", @class = "form-control", onchange = "GetMenusInRoles();" }) <br />
+                <h5 class="card-title">Menü seçiniz</h5>
+                @Html.DropDownListFor(M => M.Menus, new SelectList(Model.Menus, "id", "MenuName"), new { id = "ddl_Menus", @class = "form-control" }) <br />
+                <input type="submit" onclick="MenusInRoles();" class="btn btn-success form-control" value="Ekle" /> <br /> <br />
+                <h5 class="card-title">Role tanımlanmış menüler</h5> 
+
+                <table id="tbl_Menus" class="mb-0 table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">id</th>
+                            <th>Menü Adı</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

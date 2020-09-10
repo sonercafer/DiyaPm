@@ -17,6 +17,8 @@ namespace DiyaPM.UI.Models
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<UsersInRole> UsersInRoles { get; set; }
+        public DbSet<MenusInRole> MenusInRoles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

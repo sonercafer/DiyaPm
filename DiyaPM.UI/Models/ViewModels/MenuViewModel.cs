@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiyaPM.UI.Models.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,8 @@ namespace DiyaPM.UI.Models.ViewModels
 {
     public class MenuViewModel
     {
-        public List<Menu> Menus;
-        public List<Menu> SubMenus;
+        public List<MenuDTO> Menus;
+        public List<MenuDTO> SubMenus;
 
     }
 }
